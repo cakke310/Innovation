@@ -1,6 +1,5 @@
-package com.innovation.ui.bean;
+package com.innovation.bean;
 
-import android.app.Fragment;
 
 /**
  * Created by c_xuwei-010 on 2017/3/16.

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.innovation.ui.bean.FragmentInfo;
+import com.innovation.bean.FragmentInfo;
 import com.innovation.ui.fragment.CategoryFragment;
 import com.innovation.ui.fragment.GamesFragment;
 import com.innovation.ui.fragment.RankingFragment;
