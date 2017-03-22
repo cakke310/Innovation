@@ -16,9 +16,9 @@ public class RecommendPresenter implements RecommendContract.Presenter{
     private RecommendContract.View mView;
     private RecommendModel mModel;
 
-    public RecommendPresenter(RecommendContract.View mView) {
+    public RecommendPresenter(RecommendContract.View mView, RecommendModel model) {
         this.mView = mView;
-        mModel = new RecommendModel();
+        mModel = model;
     }
 
     @Override

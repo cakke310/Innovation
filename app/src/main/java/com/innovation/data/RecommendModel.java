@@ -2,14 +2,10 @@ package com.innovation.data;
 
 import com.innovation.bean.AppInfo;
 import com.innovation.bean.PageBean;
-import com.innovation.http.ApiService;
-import com.innovation.http.HttpManager;
+import com.innovation.data.http.ApiService;
+import com.innovation.data.http.HttpManager;
 
-import java.util.List;
-
-import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by c_xuwei-010 on 2017/3/21.

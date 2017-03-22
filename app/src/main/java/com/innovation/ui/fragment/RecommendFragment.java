@@ -1,5 +1,6 @@
 package com.innovation.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,11 +12,14 @@ import android.view.ViewGroup;
 
 import com.innovation.R;
 import com.innovation.bean.AppInfo;
-import com.innovation.presenter.RecommendPresenter;
+import com.innovation.di.component.DaggerRecommendComponent;
+import com.innovation.di.module.RecommendModule;
 import com.innovation.presenter.contract.RecommendContract;
 import com.innovation.ui.adapter.RecommendAppAdapter;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +36,12 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     RecyclerView mRecycleView;
 
     private RecommendAppAdapter mAdapter;
-    private RecommendContract.Presenter mPresenter;
+
+    @Inject
+    RecommendContract.Presenter mPresenter;
+
+    @Inject
+    ProgressDialog mProgressDialog;
 
     @Nullable
     @Override
@@ -42,10 +51,18 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         View view = inflater.inflate(R.layout.fragment_recomend, container, false);
         ButterKnife.bind(this, view);
 
-        mPresenter = new RecommendPresenter(this);
-        initData();
+
+
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        DaggerRecommendComponent.builder()
+                .recommendModule(new RecommendModule(this)).build().inject(this);
+        initData();
     }
 
     private void initData() {
@@ -78,11 +95,13 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
     @Override
     public void showLoading() {
-
+        mProgressDialog.show();
     }
 
     @Override
     public void dismissLoading() {
-
+        if(mProgressDialog.isShowing()){
+            mProgressDialog.dismiss();
+        }
     }
 }
