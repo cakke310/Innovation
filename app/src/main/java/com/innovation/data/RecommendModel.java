@@ -12,11 +12,17 @@ import retrofit2.Callback;
  */
 public class RecommendModel {
 
+    private ApiService mApiService;
+
+    public RecommendModel(ApiService mApiService) {
+        this.mApiService = mApiService;
+    }
+
     public void getApps(Callback<PageBean<AppInfo>> callback){
-        HttpManager manager = new HttpManager();
+//        HttpManager manager = new HttpManager();
+//
+//        ApiService apiService = manager.getRetrofit(manager.getOkHttpClient()).create(ApiService.class);
 
-        ApiService apiService = manager.getRetrofit(manager.getOkHttpClient()).create(ApiService.class);
-
-        apiService.getApps("{'page':0}").enqueue(callback);
+        mApiService.getApps("{'page':0}").enqueue(callback);
     }
 }

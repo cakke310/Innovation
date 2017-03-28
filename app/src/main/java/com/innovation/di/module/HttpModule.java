@@ -46,6 +46,8 @@ public class HttpModule {
         return builder.build();
     }
 
+    @Provides
+    @Singleton
     public ApiService provideApiService(Retrofit retrofit){
         return retrofit.create(ApiService.class);
     }

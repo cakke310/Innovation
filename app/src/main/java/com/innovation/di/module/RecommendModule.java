@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.innovation.data.RecommendModel;
+import com.innovation.data.http.ApiService;
 import com.innovation.presenter.RecommendPresenter;
 import com.innovation.presenter.contract.RecommendContract;
 import com.innovation.ui.fragment.RecommendFragment;
@@ -35,8 +36,8 @@ public class RecommendModule {
     }
 
     @Provides
-    public RecommendModel provideModel(){
-        return new RecommendModel();
+    public RecommendModel provideModel(ApiService apiService){
+        return new RecommendModel(apiService);
     }
 
     @Provides

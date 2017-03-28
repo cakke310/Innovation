@@ -1,5 +1,6 @@
 package com.innovation.ui.fragment;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.innovation.AppApplication;
 import com.innovation.R;
 import com.innovation.bean.AppInfo;
+import com.innovation.di.component.DaggerAppComponent;
 import com.innovation.di.component.DaggerRecommendComponent;
 import com.innovation.di.module.RecommendModule;
 import com.innovation.presenter.contract.RecommendContract;
@@ -51,6 +54,17 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         View view = inflater.inflate(R.layout.fragment_recomend, container, false);
         ButterKnife.bind(this, view);
 
+//        DaggerRecommendComponent.builder()
+//                .recommendModule(new RecommendModule(this)).build().inject(this);
+//        ((Application)getActivity().getApplication()).getAppComponent()
+
+
+
+        DaggerRecommendComponent.builder().appComponent(((AppApplication)getActivity().getApplication()).getAppComponent())
+                .recommendModule(new RecommendModule(this)).build().inject(this);
+
+        initData();
+
 
 
 
@@ -60,9 +74,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        DaggerRecommendComponent.builder()
-                .recommendModule(new RecommendModule(this)).build().inject(this);
-        initData();
+
     }
 
     private void initData() {
