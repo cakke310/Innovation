@@ -1,9 +1,12 @@
 package com.innovation.presenter;
 
+import com.innovation.R;
 import com.innovation.bean.AppInfo;
 import com.innovation.bean.PageBean;
 import com.innovation.data.RecommendModel;
 import com.innovation.presenter.contract.RecommendContract;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -12,16 +15,13 @@ import retrofit2.Response;
 /**
  * Created by c_xuwei-010 on 2017/3/21.
  */
-public class RecommendPresenter implements RecommendContract.Presenter{
-    private RecommendContract.View mView;
-    private RecommendModel mModel;
+public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendContract.View>{
 
-    public RecommendPresenter(RecommendContract.View mView, RecommendModel model) {
-        this.mView = mView;
-        mModel = model;
+    @Inject
+    public RecommendPresenter(RecommendModel recommendModel, RecommendContract.View view) {
+        super(recommendModel, view);
     }
 
-    @Override
     public void requestDatas() {
         mView.showLoading();
 
