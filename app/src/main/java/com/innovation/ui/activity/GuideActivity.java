@@ -1,5 +1,6 @@
 package com.innovation.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.innovation.R;
+import com.innovation.common.Constant;
+import com.innovation.common.util.ACache;
 import com.innovation.ui.adapter.GuideFragmentAdapter;
 import com.innovation.ui.fragment.GuideFragment;
 import com.innovation.ui.widget.CircleIndicator;
@@ -18,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class GuideActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -74,5 +78,12 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @OnClick(R.id.btn_enter)
+    public void onClick(){
+        ACache.get(this).put(Constant.IS_SHOW_GUIDE,"0");
+        startActivity(new Intent(this,MainActivity.class));
+        this.finish();
     }
 }

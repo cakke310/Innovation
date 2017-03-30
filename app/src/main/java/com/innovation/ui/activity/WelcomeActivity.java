@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 
 import com.eftimoff.androipathview.PathView;
 import com.innovation.R;
+import com.innovation.common.Constant;
+import com.innovation.common.util.ACache;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mPathView.getPathAnimator()
-                .delay(10).duration(5000)
+                .delay(10).duration(2000)
                 .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
                     @Override
                     public void onAnimationEnd() {
@@ -40,7 +42,16 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void jump() {
-        startActivity(new Intent(this,MainActivity.class));
+
+        String isShowGuide = ACache.get(this).getAsString(Constant.IS_SHOW_GUIDE);
+
+        if(null == isShowGuide){
+            startActivity(new Intent(this,GuideActivity.class));
+        }
+        else {
+            startActivity(new Intent(this,MainActivity.class));
+        }
+
         this.finish();
     }
 }
